@@ -1,5 +1,6 @@
 import requests
 import xml.etree.ElementTree as ET
+from xml.dom import minidom
 from datetime import datetime
 import pytz
 
@@ -37,8 +38,13 @@ def main():
         if not found:
             break
             
-    tree = ET.ElementTree(rss)
-    tree.write("feed_Korit.xml")
+    # ElementTreeオブジェクトをきれいに整形する
+    xml_str = ET.tostring(rss)
+    xml_pretty_str = minidom.parseString(xml_str).toprettyxml(indent="  ")
+    
+    # 整形したXMLをファイルに保存
+    with open("rss_feed.xml", "w") as f:
+        f.write(xml_pretty_str)
 
 if __name__ == "__main__":
     main()
