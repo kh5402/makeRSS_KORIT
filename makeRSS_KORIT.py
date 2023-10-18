@@ -4,6 +4,7 @@ from xml.dom import minidom
 from datetime import datetime
 import pytz
 import os
+import re
 
 def main():
     output_file = "feed_Korit.xml"
