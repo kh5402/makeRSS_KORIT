@@ -7,7 +7,7 @@ import os
 import re
 
 def main():
-    output_file = "feed_Korit.xml"
+    output_file = "makeRSS_Korit.xml"
     
     # 既存のRSSフィードを読み込む
     existing_links = set()
