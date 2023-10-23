@@ -57,10 +57,14 @@ def main():
     
     # 整形して保存
     xml_str = ET.tostring(root)
+    
     # 不正なXML文字を取り除く
     xml_str = re.sub(u'[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]', '', xml_str.decode()).encode()
     xml_pretty_str = minidom.parseString(xml_str).toprettyxml(indent="  ")
-    
+
+    # 空白行を取り除く
+    xml_pretty_str = os.linesep.join([s for s in xml_pretty_str.splitlines() if s.strip()])
+
     with open(output_file, "w") as f:
         f.write(xml_pretty_str)
 
